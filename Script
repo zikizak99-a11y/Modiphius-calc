@@ -1,0 +1,76 @@
+// ---------------- CONFIG (edit these only)
+// Monthly visitors (integer)
+const VISITORS = 200000;
+// Average order value in GBP
+const AOV = 50;
+// Current conversion rate (2% => 0.02)
+const CURRENT_CR = 0.02;
+// ---------------- END CONFIG
+
+// helpers
+const fmtCurrency = v => new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(v);
+const fmtPercent = v => (v*100).toFixed(2) + '%';
+
+// DOM refs
+const slider = document.getElementById('slider');
+const sliderLabel = document.getElementById('sliderLabel');
+const useLift = document.getElementById('useLift');
+
+const visitorsCur = document.getElementById('visitorsCur');
+const visitorsEst = document.getElementById('visitorsEst');
+const aovCur = document.getElementById('aovCur');
+const aovEst = document.getElementById('aovEst');
+const crCur = document.getElementById('crCur');
+const crEst = document.getElementById('crEst');
+const mrevCur = document.getElementById('mrevCur');
+const mrevEst = document.getElementById('mrevEst');
+const arevCur = document.getElementById('arevCur');
+const arevEst = document.getElementById('arevEst');
+
+// initialize static fields
+visitorsCur.textContent = VISITORS.toLocaleString();
+visitorsEst.textContent = VISITORS.toLocaleString();
+aovCur.textContent = fmtCurrency(AOV);
+aovEst.textContent = fmtCurrency(AOV);
+crCur.textContent = fmtPercent(CURRENT_CR);
+
+// compute and render
+function render() {
+  // get slider value
+  const sVal = Number(slider.value); // slider units: percent (either lift% or absolute %)
+  let estimatedCR;
+
+  if (useLift.checked) {
+    // slider is a relative lift (e.g. +10 => +10% to conversion)
+    const liftPct = sVal / 100;
+    estimatedCR = CURRENT_CR * (1 + liftPct);
+    sliderLabel.textContent = (sVal >= 0 ? '+'+sVal : sVal) + '% lift';
+  } else {
+    // slider is absolute conversion rate in percent (e.g. 3 => 3%)
+    estimatedCR = Math.max(0, sVal / 100);
+    sliderLabel.textContent = sVal + '% conv';
+  }
+
+  // ensure non-negative
+  estimatedCR = Math.max(0, estimatedCR);
+
+  // calculate revenues
+  const monthlyRevCurrent = VISITORS * AOV * CURRENT_CR;
+  const monthlyRevEstimated = VISITORS * AOV * estimatedCR;
+  const annualRevCurrent = monthlyRevCurrent * 12;
+  const annualRevEstimated = monthlyRevEstimated * 12;
+
+  // write results
+  crEst.textContent = fmtPercent(estimatedCR);
+  mrevCur.textContent = fmtCurrency(monthlyRevCurrent);
+  mrevEst.textContent = fmtCurrency(monthlyRevEstimated);
+  arevCur.textContent = fmtCurrency(annualRevCurrent);
+  arevEst.textContent = fmtCurrency(annualRevEstimated);
+}
+
+// events
+slider.addEventListener('input', render);
+useLift.addEventListener('change', render);
+
+// initial render
+render();
