@@ -1,0 +1,11 @@
+# Modiphius — Revenue Uplift Calculator
+
+This is a simple static calculator for Modiphius. Files:
+- index.html (main page)
+- styles.css (styles)
+- script.js (logic - edit config at top to change visitors/AOV/current CR)
+- modiphius-logo.png (place your logo file in the repo root)
+
+To edit numbers: open `script.js` and change VISITORS, AOV, CURRENT_CR at the top.
+
+Deploy: connect this repository to Vercel (import GitHub repository). Vercel will auto-deploy on each commit.
