@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Modiphius — Revenue Uplift Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <!-- Put modiphius-logo.png in the repo root (exact filename) -->
+      <img id="brandLogo" src="modiphius-logo.png" alt="Modiphius" />
+      <h1>Revenue Uplift From Actionable Behavioural Data</h1>
+    </header>
+
+    <section class="controls">
+      <label class="toggle">
+        <input type="checkbox" id="useLift" checked />
+        Use slider as <strong>% lift</strong> (adds to current conversion rate)
+      </label>
+
+      <div class="slider-row">
+        <input type="range" id="slider" min="-50" max="200" value="0" />
+        <div id="sliderLabel">+0%</div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Current</th><th>Estimated with Acoustic</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Total Monthly Web Visitors</td><td id="visitorsCur">200,000</td><td id="visitorsEst">200,000</td></tr>
+          <tr><td>Average Order Value</td><td id="aovCur">£50.00</td><td id="aovEst">£50.00</td></tr>
+          <tr><td>Conversion rate</td><td id="crCur">2.00%</td><td id="crEst">2.00%</td></tr>
+          <tr><td>Total Monthly Revenue</td><td id="mrevCur">£200,000.00</td><td id="mrevEst">£200,000.00</td></tr>
+          <tr><td>Total Annual Revenue</td><td id="arevCur">£2,400,000.00</td><td id="arevEst">£2,400,000.00</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="benchmarks" class="benchmarks">
+      <h2>Benchmarks for small UK retailers</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Personalisation based on behaviour/product interest</h3>
+          <p>Reported uplift: <strong>~10–15%</strong> — <a id="link1" href="https://www.mckinsey.com/" target="_blank">benchmark report</a></p>
+        </div>
+
+        <div class="card">
+          <h3>Segmentation of audience (attributes + behaviour)</h3>
+          <p>Reported uplift: <strong>~10–20%</strong> — <a id="link2" href="#" target="_blank">benchmark report</a></p>
+        </div>
+
+        <div class="card">
+          <h3>Multi-step journeys (welcome & re-engagement)</h3>
+          <p>Reported uplift: <strong>~8–12%</strong> — <a id="link3" href="#" target="_blank">benchmark report</a></p>
+        </div>
+
+        <div class="card">
+          <h3>Cart & browser abandonment flows</h3>
+          <p>Reported uplift: <strong>~5–10%+</strong> — <a id="link4" href="https://www.klaviyo.com/" target="_blank">benchmark report</a></p>
+        </div>
+      </div>
+      <p class="small">Click the links to replace them with your preferred benchmark reports for Modiphius.</p>
+    </section>
+
+    <footer class="footer">
+      <small>Numbers are illustrative. Edit the config at the top of <code>script.js</code> to change visitors, AOV or current conversion rate.</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
